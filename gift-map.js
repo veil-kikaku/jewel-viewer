@@ -220,6 +220,31 @@ const GIFT_MAP = {
         jewel: 5
     },
 
+    gg_planet_v2: {
+        name: "GGプラネット",
+        jewel: 380
+    },
+
+    watermelon: {
+        name: "スイカ",
+        jewel: 500
+    },
+
+    heart_you: {
+        name: "ハート型のしゃぼん玉",
+        jewel: 1500
+    },
+
+    salmon_nigiri: {
+        name: "すし",
+        jewel: 200
+    },
+
+    pudding_cat: {
+        name: "プリンの猫",
+        jewel: 500
+    },
+
     xxxxx: {
         name: "xxxx",
         jewel: 0
