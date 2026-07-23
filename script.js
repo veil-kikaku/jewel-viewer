@@ -196,25 +196,19 @@ function render(){
 
 function formatTime(ms){
 
-    const sec =
-        Math.floor(ms/1000);
+    const totalSeconds = Math.floor(ms / 1000);
 
-    const h =
-        Math.floor(sec/3600);
+    const hours = Math.floor(totalSeconds / 3600);
 
-    const m =
-        Math.floor((sec%3600)/60);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
 
-    const s =
-        sec%60;
+    const seconds = totalSeconds % 60;
 
-    if(h>0){
-
-        return `${h}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
-
-    }
-
-    return `${m}:${String(s).padStart(2,"0")}`;
+    return [
+        String(hours).padStart(2, "0"),
+        String(minutes).padStart(2, "0"),
+        String(seconds).padStart(2, "0")
+    ].join(":");
 
 }
 
