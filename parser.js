@@ -1,4 +1,3 @@
-```javascript
 // parser.js
 // YouTube Live Chat Replay (NDJSON)
 // Jewel Gift (giftMessageViewModel) Parser
@@ -121,4 +120,3 @@ function getJewelCount(imageName) {
     return map[imageName] || 0;
 
 }
-```
