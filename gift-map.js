@@ -126,7 +126,7 @@ const GIFT_MAP = {
     },
 
     its_cake: {
-        name: "トロフィーの形のアイス",
+        name: "トロフィーの形のケーキ",
         jewel: 1000
     },
 
@@ -181,7 +181,7 @@ const GIFT_MAP = {
     },
 
     crying_hamster: {
-        name: "泣いてるハムスター",
+        name: "泣いているハムスター",
         jewel: 600
     },
 
@@ -231,7 +231,7 @@ const GIFT_MAP = {
     },
 
     heart_you: {
-        name: "ハート型のしゃぼん玉",
+        name: "ハートのトッピングは必須",
         jewel: 1500
     },
 
@@ -301,7 +301,7 @@ const GIFT_MAP = {
     },
 
     tube_dancer: {
-        name: "チューブダンス",
+        name: "チューブ ダンサー",
         jewel: 1500
     },
 
@@ -323,6 +323,21 @@ const GIFT_MAP = {
     pug_nap: {
         name: "昼寝",
         jewel: 680
+    },
+
+    loot_box: {
+        name: "ルートボックス",
+        jewel: 1000
+    },
+
+    soccer_trophy: {
+        name: "サッカーのトロフィー",
+        jewel: 500
+    },
+
+    sunshine: {
+        name: "サンシャイン",
+        jewel: 200
     },
 
     xxxxx: {
