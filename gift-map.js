@@ -265,6 +265,31 @@ const GIFT_MAP = {
         jewel: 5500
     },
 
+    silver_star_v2_320x320: {
+        name: "星",
+        jewel: 2
+    },
+
+    lol: {
+        name: "笑顔のディスコ",
+        jewel: 250
+    },
+
+    air_travel: {
+        name: "空の旅",
+        jewel: 1000
+    },
+
+    tanghulu: {
+        name: "タンフル",
+        jewel: 300
+    },
+
+    xxxxx: {
+        name: "xxxx",
+        jewel: 0
+    },
+
     xxxxx: {
         name: "xxxx",
         jewel: 0
