@@ -285,9 +285,44 @@ const GIFT_MAP = {
         jewel: 300
     },
 
-    xxxxx: {
-        name: "xxxx",
-        jewel: 0
+    park_the_bus: {
+        name: "バスの駐車",
+        jewel: 1000
+    },
+
+    red_card: {
+        name: "レッドカード",
+        jewel: 250
+    },
+
+    beach_dog: {
+        name: "ビーチの犬",
+        jewel: 3000
+    },
+
+    tube_dancer: {
+        name: "チューブダンス",
+        jewel: 1500
+    },
+
+    naisu: {
+        name: "ナイス",
+        jewel: 400
+    },
+
+    kawaii_crepe: {
+        name: "ハートのトッピング",
+        jewel: 500
+    },
+
+    bear_bread: {
+        name: "クマのパン",
+        jewel: 500
+    },
+
+    pug_nap: {
+        name: "昼寝",
+        jewel: 680
     },
 
     xxxxx: {
