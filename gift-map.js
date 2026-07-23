@@ -155,6 +155,51 @@ const GIFT_MAP = {
         jewel: 400
     },
 
+    yabai_skull: {
+        name: "ヤバー",
+        jewel: 1000
+    },
+
+    microphone_gift: {
+        name: "マイク",
+        jewel: 6
+    },
+
+    konkon: {
+        name: "こんこん",
+        jewel: 320
+    },
+
+    saiko_kayo: {
+        name: "最高かよ",
+        jewel: 320
+    },
+
+    xxxxx: {
+        name: "xxxx",
+        jewel: 0
+    },
+
+    xxxxx: {
+        name: "xxxx",
+        jewel: 0
+    },
+
+    xxxxx: {
+        name: "xxxx",
+        jewel: 0
+    },
+
+    xxxxx: {
+        name: "xxxx",
+        jewel: 0
+    },
+
+    xxxxx: {
+        name: "xxxx",
+        jewel: 0
+    },
+
     xxxxx: {
         name: "xxxx",
         jewel: 0
