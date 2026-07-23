@@ -175,8 +175,6 @@ function getGiftInfo(imageName){
 
         jewel: 0,
 
-        amount: 0
-
     };
 
 }
@@ -187,15 +185,6 @@ function getGiftInfo(imageName){
 function getJewelCount(imageName){
 
     return getGiftInfo(imageName).jewel;
-
-}
-
-/**
- * 金額取得
- */
-function getAmount(imageName){
-
-    return getGiftInfo(imageName).amount;
 
 }
 
