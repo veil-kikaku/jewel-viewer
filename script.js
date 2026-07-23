@@ -12,7 +12,6 @@ const sortBy = document.getElementById("sortBy");
 
 const countLabel = document.getElementById("count");
 const totalJewelLabel = document.getElementById("totalJewel");
-const totalAmountLabel = document.getElementById("totalAmount");
 
 const resultBody = document.getElementById("resultBody");
 
@@ -83,15 +82,6 @@ function render(){
 
             break;
 
-        case "amount":
-
-            data.sort(
-                (a,b)=>
-                    b.amount-a.amount
-            );
-
-            break;
-
         case "name":
 
             data.sort(
@@ -124,21 +114,11 @@ function render(){
             0
         );
 
-    const totalAmount =
-        data.reduce(
-            (sum,item)=>
-                sum+item.amount,
-            0
-        );
-
     countLabel.textContent =
         data.length.toLocaleString();
 
     totalJewelLabel.textContent =
         totalJewel.toLocaleString();
-
-    totalAmountLabel.textContent =
-        "¥"+totalAmount.toLocaleString();
 
     //--------------------------------------
     // Empty
@@ -199,12 +179,6 @@ function render(){
             <td>
 
                 ${item.jewel.toLocaleString()}
-
-            </td>
-
-            <td>
-
-                ¥${item.amount.toLocaleString()}
 
             </td>
 

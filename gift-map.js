@@ -12,14 +12,12 @@ const GIFT_MAP = {
 
     tea_money: {
         name: "Tea money",
-        jewel: 100,
-        amount: 200
+        jewel: 90
     },
 
     laughing_bear_www: {
         name: "wwwww",
-        jewel: 0,
-        amount: 0
+        jewel: 0
     }
 
 };

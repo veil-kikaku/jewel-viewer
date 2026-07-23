@@ -16,7 +16,6 @@ function downloadCsv(data){
         "Author",
         "Gift",
         "Jewel",
-        "Amount",
         "Image"
     ]);
 
@@ -35,8 +34,6 @@ function downloadCsv(data){
             item.giftName,
 
             item.jewel,
-
-            item.amount,
 
             item.imageName
 

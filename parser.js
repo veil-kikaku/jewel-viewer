@@ -121,9 +121,6 @@ function parseChatFile(text) {
                     jewel:
                         info.jewel,
 
-                    amount:
-                        info.amount,
-
                     raw: gift
 
                 });
