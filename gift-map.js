@@ -137,7 +137,7 @@ const GIFT_MAP = {
 
     shocked: {
         name: "驚き",
-        jewel: 6⃣
+        jewel: 6
     },
 
     kami: {
