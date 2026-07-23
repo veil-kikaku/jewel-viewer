@@ -340,9 +340,9 @@ const GIFT_MAP = {
         jewel: 200
     },
 
-    xxxxx: {
-        name: "xxxx",
-        jewel: 0
+    tete: {
+        name: "尊い",
+        jewel: 320
     }
 
 };
