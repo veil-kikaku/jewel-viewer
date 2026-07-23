@@ -158,7 +158,7 @@ const GIFT_MAP = {
     xxxxx: {
         name: "xxxx",
         jewel: 0
-    },
+    }
 
 };
 
