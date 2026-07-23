@@ -160,16 +160,6 @@ const GIFT_MAP = {
         jewel: 0
     },
 
-    xxxxx: {
-        name: "xxxx",
-        jewel: 0
-    },
-
-    xxxxx: {
-        name: "xxxx",
-        jewel: 0
-    }
-
 };
 
 /**
