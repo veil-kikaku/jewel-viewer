@@ -185,9 +185,39 @@ const GIFT_MAP = {
         jewel: 600
     },
 
-    xxxxx: {
-        name: "xxxx",
-        jewel: 0
+    fired_up: {
+        name: "やる気満々",
+        jewel: 250
+    },
+
+    sparkles_v2_320x320: {
+        name: "キラキラ",
+        jewel: 2
+    },
+
+    one_hundred_v2_320x320: {
+        name: "100",
+        jewel: 2
+    },
+
+    microphone: {
+        name: "マイク",
+        jewel: 100
+    },
+
+    finger_heart: {
+        name: "指ハート",
+        jewel: 350
+    },
+
+    thankful: {
+        name: "感謝",
+        jewel: 7
+    },
+
+    gg_taiotsu: {
+        name: "対おつ",
+        jewel: 5
     },
 
     xxxxx: {
