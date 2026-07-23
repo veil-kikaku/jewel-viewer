@@ -105,6 +105,66 @@ const GIFT_MAP = {
         jewel: 320
     },
 
+    husky: {
+        name: "ハスキー",
+        jewel: 800
+    },
+
+    gold_coin_v2_320x320: {
+        name: "金貨",
+        jewel: 10
+    },
+
+    ggez: {
+        name: "GGEZ",
+        jewel: 20
+    },
+
+    sorena: {
+        name: "それな",
+        jewel: 2
+    },
+
+    its_cake: {
+        name: "トロフィーの形のアイス",
+        jewel: 1000
+    },
+
+    gg_hamster: {
+        name: "GGハムスター",
+        jewel: 77
+    },
+
+    shocked: {
+        name: "驚き",
+        jewel: 6⃣
+    },
+
+    kami: {
+        name: "神",
+        jewel: 150
+    },
+
+    hand_heart: {
+        name: "指ハート",
+        jewel: 300
+    },
+
+    goodwork_jp: {
+        name: "おつかれさまです",
+        jewel: 400
+    },
+
+    xxxxx: {
+        name: "xxxx",
+        jewel: 0
+    },
+
+    xxxxx: {
+        name: "xxxx",
+        jewel: 0
+    },
+
     xxxxx: {
         name: "xxxx",
         jewel: 0
