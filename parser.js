@@ -1,12 +1,11 @@
-// parser.js
+// parser.js v2
 
 function parseChatFile(text) {
 
     const result = [];
+    const rendererTypes = new Set();
 
-    const lines = text
-        .split(/\r?\n/)
-        .filter(line => line.trim() !== "");
+    const lines = text.split(/\r?\n/).filter(Boolean);
 
     for (const line of lines) {
 
@@ -19,59 +18,36 @@ function parseChatFile(text) {
 
             for (const action of actions) {
 
-                const renderer =
-                    action?.addChatItemAction?.item
-                    ?.liveChatPaidStickerRenderer;
+                const item =
+                    action?.addChatItemAction?.item;
 
-                if (!renderer) continue;
+                if (!item) continue;
 
-                const author =
-                    renderer.authorName?.simpleText || "";
+                // この行が重要
+                const rendererName = Object.keys(item)[0];
+                rendererTypes.add(rendererName);
 
-                const amountText =
-                    renderer.purchaseAmountText?.simpleText || "";
+                // ジュエルギフトらしいイベントだけ抽出
+                if (
+                    rendererName.toLowerCase().includes("gift") ||
+                    rendererName.toLowerCase().includes("jewel")
+                ) {
 
-                const timestamp =
-                    renderer.timestampText?.simpleText || "";
+                    result.push({
+                        renderer: rendererName,
+                        raw: item[rendererName]
+                    });
 
-                const image =
-                    renderer.sticker?.thumbnails?.slice(-1)[0]?.url || "";
-
-                // 金額（数字のみ）
-                const amount =
-                    Number(
-                        amountText.replace(/[^\d]/g, "")
-                    ) || 0;
-
-                // ジュエル取得
-                // metadata に jewel がある場合は使用
-                let jewel =
-                    renderer.jewelCount ||
-                    renderer.purchaseAmount ||
-                    renderer.jewels ||
-                    0;
-
-                // 無ければ金額を仮設定
-                if (!jewel) {
-                    jewel = amount;
                 }
-
-                result.push({
-                    timestamp,
-                    author,
-                    jewel,
-                    amount,
-                    image
-                });
 
             }
 
-        }
-        catch (e) {
-            // 壊れた行は無視
-        }
+        } catch (e) {}
 
     }
+
+    console.log("Renderer一覧");
+    console.table([...rendererTypes]);
 
     return result;
 
