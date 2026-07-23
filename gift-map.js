@@ -175,14 +175,14 @@ const GIFT_MAP = {
         jewel: 320
     },
 
-    xxxxx: {
-        name: "xxxx",
-        jewel: 0
+    omedetou: {
+        name: "おめでとう",
+        jewel: 500
     },
 
-    xxxxx: {
-        name: "xxxx",
-        jewel: 0
+    crying_hamster: {
+        name: "泣いてるハムスター",
+        jewel: 600
     },
 
     xxxxx: {
