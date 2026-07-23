@@ -1,4 +1,7 @@
 // script.js
+// ==========================================
+// Jewel Viewer UI
+// ==========================================
 
 let allData = [];
 
@@ -7,16 +10,24 @@ const minJewel = document.getElementById("minJewel");
 const searchName = document.getElementById("searchName");
 const sortBy = document.getElementById("sortBy");
 
+const countLabel = document.getElementById("count");
+const totalJewelLabel = document.getElementById("totalJewel");
+const totalAmountLabel = document.getElementById("totalAmount");
+
+const resultBody = document.getElementById("resultBody");
+
 fileInput.addEventListener("change", loadFile);
 minJewel.addEventListener("change", render);
 searchName.addEventListener("input", render);
 sortBy.addEventListener("change", render);
 
-async function loadFile(e) {
+async function loadFile(event){
 
-    const file = e.target.files[0];
+    const file = event.target.files[0];
 
-    if (!file) return;
+    if(!file){
+        return;
+    }
 
     const text = await file.text();
 
@@ -26,94 +37,247 @@ async function loadFile(e) {
 
 }
 
-function render() {
+function render(){
 
-    const tbody = document.getElementById("resultBody");
+    let data = [...allData];
 
-    tbody.innerHTML = "";
+    //--------------------------------------
+    // Filter Jewel
+    //--------------------------------------
 
     const min = Number(minJewel.value);
 
-    const keyword = searchName.value
-        .toLowerCase()
-        .trim();
+    data = data.filter(item => item.jewel >= min);
 
-    let list = allData.filter(item => {
+    //--------------------------------------
+    // Search Name
+    //--------------------------------------
 
-        if (item.jewel < min) return false;
+    const keyword =
+        searchName.value
+            .trim()
+            .toLowerCase();
 
-        if (
-            keyword &&
-            !item.author.toLowerCase().includes(keyword)
-        ) {
-            return false;
-        }
+    if(keyword){
 
-        return true;
+        data = data.filter(item =>
+            item.author
+                .toLowerCase()
+                .includes(keyword)
+        );
 
-    });
+    }
 
-    switch (sortBy.value) {
+    //--------------------------------------
+    // Sort
+    //--------------------------------------
+
+    switch(sortBy.value){
 
         case "jewel":
-            list.sort((a,b)=>b.jewel-a.jewel);
+
+            data.sort(
+                (a,b)=>
+                    b.jewel-a.jewel
+            );
+
             break;
 
         case "amount":
-            list.sort((a,b)=>b.amount-a.amount);
+
+            data.sort(
+                (a,b)=>
+                    b.amount-a.amount
+            );
+
             break;
 
         case "name":
-            list.sort((a,b)=>a.author.localeCompare(b.author));
+
+            data.sort(
+                (a,b)=>
+                    a.author.localeCompare(
+                        b.author,
+                        "ja"
+                    )
+            );
+
             break;
 
         default:
-            // 時間順（元の並び）
-            break;
-    }
 
-    let totalJewel = 0;
-    let totalAmount = 0;
-
-    for (const item of list) {
-
-        totalJewel += item.jewel;
-        totalAmount += item.amount;
-
-        const tr = document.createElement("tr");
-
-        tr.innerHTML = `
-            <td>${item.timestamp}</td>
-            <td>${item.author}</td>
-            <td>${item.jewel.toLocaleString()}</td>
-            <td>¥${item.amount.toLocaleString()}</td>
-            <td>
-                ${
-                    item.image
-                    ? `<img src="${item.image}" width="48">`
-                    : ""
-                }
-            </td>
-        `;
-
-        tbody.appendChild(tr);
+            data.sort(
+                (a,b)=>
+                    a.timestamp-b.timestamp
+            );
 
     }
 
-    if (list.length === 0) {
+    //--------------------------------------
+    // Stats
+    //--------------------------------------
 
-        tbody.innerHTML =
-            "<tr><td colspan='5'>該当データがありません</td></tr>";
+    const totalJewel =
+        data.reduce(
+            (sum,item)=>
+                sum+item.jewel,
+            0
+        );
 
-    }
+    const totalAmount =
+        data.reduce(
+            (sum,item)=>
+                sum+item.amount,
+            0
+        );
 
-    document.getElementById("count").textContent =
-        list.length.toLocaleString();
+    countLabel.textContent =
+        data.length.toLocaleString();
 
-    document.getElementById("totalJewel").textContent =
+    totalJewelLabel.textContent =
         totalJewel.toLocaleString();
 
-    document.getElementById("totalAmount").textContent =
-        "¥" + totalAmount.toLocaleString();
+    totalAmountLabel.textContent =
+        "¥"+totalAmount.toLocaleString();
+
+    //--------------------------------------
+    // Empty
+    //--------------------------------------
+
+    if(data.length===0){
+
+        resultBody.innerHTML=`
+        <tr>
+            <td
+                colspan="6"
+                class="empty">
+                データがありません
+            </td>
+        </tr>
+        `;
+
+        return;
+
+    }
+
+    //--------------------------------------
+    // Table
+    //--------------------------------------
+
+    resultBody.innerHTML="";
+
+    data.forEach(item=>{
+
+        const tr=document.createElement("tr");
+
+        tr.innerHTML=`
+
+            <td>
+                ${formatTime(item.timestamp)}
+            </td>
+
+            <td>
+
+                <img
+                    src="${item.image}"
+                    alt="${escapeHtml(item.giftName)}">
+
+            </td>
+
+            <td>
+
+                ${escapeHtml(item.author)}
+
+            </td>
+
+            <td>
+
+                ${escapeHtml(item.giftName)}
+
+            </td>
+
+            <td>
+
+                ${item.jewel.toLocaleString()}
+
+            </td>
+
+            <td>
+
+                ¥${item.amount.toLocaleString()}
+
+            </td>
+
+        `;
+
+        resultBody.appendChild(tr);
+
+    });
 
 }
+
+//--------------------------------------
+// Time
+//--------------------------------------
+
+function formatTime(ms){
+
+    const sec =
+        Math.floor(ms/1000);
+
+    const h =
+        Math.floor(sec/3600);
+
+    const m =
+        Math.floor((sec%3600)/60);
+
+    const s =
+        sec%60;
+
+    if(h>0){
+
+        return `${h}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+
+    }
+
+    return `${m}:${String(s).padStart(2,"0")}`;
+
+}
+
+//--------------------------------------
+// HTML Escape
+//--------------------------------------
+
+function escapeHtml(text){
+
+    return String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+//--------------------------------------
+// CSV
+//--------------------------------------
+
+document
+.getElementById("downloadCsv")
+.addEventListener(
+    "click",
+    ()=>{
+
+        if(allData.length===0){
+
+            alert("データがありません");
+
+            return;
+
+        }
+
+        downloadCsv(allData);
+
+    }
+);

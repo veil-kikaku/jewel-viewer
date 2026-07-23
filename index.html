@@ -7,150 +7,185 @@
 
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <header>
+
     <h1>💎 Jewel Viewer</h1>
-    <p>YouTube Live Chat Replay - Super Sticker Viewer</p>
+
+    <p>
+        YouTube Live Chat Replay（NDJSON）
+        <br>
+        ジュエルギフト専用ビューア
+    </p>
+
 </header>
 
 <main>
 
-<section class="card">
+    <section class="card">
 
-    <h2>JSONファイル</h2>
+        <label>
+            チャットJSON
+            <input
+                type="file"
+                id="fileInput"
+                accept=".json,.txt,.ndjson">
+        </label>
 
-    <input
-        type="file"
-        id="fileInput"
-        accept=".json,.txt"
-    >
+    </section>
 
-</section>
+    <section class="card filters">
 
-<section class="card filters">
+        <div>
 
-    <div>
+            <label>最低ジュエル</label>
 
-        <label>最低ジュエル</label>
+            <select id="minJewel">
 
-        <select id="minJewel">
-            <option value="0">0</option>
-            <option value="50">50+</option>
-            <option value="100" selected>100+</option>
-            <option value="200">200+</option>
-            <option value="500">500+</option>
-            <option value="1000">1000+</option>
-            <option value="5000">5000+</option>
-        </select>
+                <option value="0">すべて</option>
+                <option value="100">100以上</option>
+                <option value="500">500以上</option>
+                <option value="1000">1000以上</option>
+                <option value="5000">5000以上</option>
+                <option value="10000">10000以上</option>
 
-    </div>
+            </select>
 
-    <div>
+        </div>
 
-        <label>ユーザー検索</label>
+        <div>
 
-        <input
-            id="searchName"
-            type="text"
-            placeholder="名前を入力">
+            <label>ユーザー検索</label>
 
-    </div>
+            <input
+                id="searchName"
+                type="text"
+                placeholder="ユーザー名">
 
-    <div>
+        </div>
 
-        <label>並び替え</label>
+        <div>
 
-        <select id="sortBy">
-            <option value="time">時間順</option>
-            <option value="jewel">ジュエル順</option>
-            <option value="amount">金額順</option>
-            <option value="name">名前順</option>
-        </select>
+            <label>並び替え</label>
 
-    </div>
+            <select id="sortBy">
 
-</section>
+                <option value="time">
+                    時間順
+                </option>
 
-<section class="stats">
+                <option value="jewel">
+                    ジュエル順
+                </option>
 
-    <div class="stat">
-        <span>件数</span>
-        <strong id="count">0</strong>
-    </div>
+                <option value="amount">
+                    金額順
+                </option>
 
-    <div class="stat">
-        <span>合計ジュエル</span>
-        <strong id="totalJewel">0</strong>
-    </div>
+                <option value="name">
+                    名前順
+                </option>
 
-    <div class="stat">
-        <span>合計金額</span>
-        <strong id="totalAmount">¥0</strong>
-    </div>
+            </select>
 
-</section>
+        </div>
 
-<section class="card">
+    </section>
 
-    <button id="downloadCsv">
-        CSVダウンロード
-    </button>
+    <section class="stats">
 
-</section>
+        <div class="stat">
 
-<section class="card table-area">
+            <span>件数</span>
 
-<table id="resultTable">
+            <strong id="count">0</strong>
 
-<thead>
+        </div>
 
-<tr>
+        <div class="stat">
 
-<th>時間</th>
+            <span>合計ジュエル</span>
 
-<th>ユーザー</th>
+            <strong id="totalJewel">0</strong>
 
-<th>ジュエル</th>
+        </div>
 
-<th>金額</th>
+        <div class="stat">
 
-<th>ステッカー</th>
+            <span>合計金額</span>
 
-</tr>
+            <strong id="totalAmount">¥0</strong>
 
-</thead>
+        </div>
 
-<tbody id="resultBody">
+    </section>
 
-<tr>
+    <section class="card">
 
-<td colspan="5">
+        <button id="downloadCsv">
 
-JSONファイルを選択してください
+            CSVダウンロード
 
-</td>
+        </button>
 
-</tr>
+    </section>
 
-</tbody>
+    <section class="card table-area">
 
-</table>
+        <table>
 
-</section>
+            <thead>
+
+            <tr>
+
+                <th>時間</th>
+
+                <th>画像</th>
+
+                <th>ユーザー</th>
+
+                <th>ギフト</th>
+
+                <th>ジュエル</th>
+
+                <th>金額</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody id="resultBody">
+
+            <tr>
+
+                <td colspan="6">
+
+                    JSONを読み込んでください
+
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </section>
 
 </main>
 
 <footer>
 
-Jewel Viewer v1.0
+    Jewel Viewer v2.0
 
 </footer>
 
+<script src="gift-map.js"></script>
 <script src="parser.js"></script>
-<script src="csv.js"></script>
 <script src="script.js"></script>
+<script src="csv.js"></script>
 
 </body>
 </html>
-

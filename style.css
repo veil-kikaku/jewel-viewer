@@ -1,3 +1,5 @@
+/* Jewel Viewer v2 */
+
 *{
     margin:0;
     padding:0;
@@ -5,9 +7,9 @@
 }
 
 body{
-    background:#111827;
-    color:#f3f4f6;
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Meiryo,sans-serif;
+    background:#0f172a;
+    color:#f8fafc;
     padding:24px;
 }
 
@@ -18,25 +20,26 @@ header{
 
 header h1{
     font-size:2rem;
-    color:#60a5fa;
+    color:#38bdf8;
+    margin-bottom:10px;
 }
 
 header p{
-    color:#9ca3af;
-    margin-top:8px;
+    color:#94a3b8;
+    line-height:1.6;
 }
 
 main{
-    max-width:1200px;
+    max-width:1400px;
     margin:auto;
 }
 
 .card{
-    background:#1f2937;
+    background:#1e293b;
     border-radius:12px;
     padding:20px;
     margin-bottom:20px;
-    box-shadow:0 2px 10px rgba(0,0,0,.3);
+    box-shadow:0 5px 18px rgba(0,0,0,.35);
 }
 
 .filters{
@@ -47,25 +50,25 @@ main{
 
 .filters label{
     display:block;
-    margin-bottom:8px;
     font-size:.9rem;
-    color:#d1d5db;
+    margin-bottom:8px;
+    color:#cbd5e1;
 }
 
 input,
 select{
     width:100%;
-    padding:10px;
-    border:none;
+    padding:11px;
     border-radius:8px;
-    background:#374151;
+    border:none;
+    background:#334155;
     color:white;
-    font-size:1rem;
+    font-size:15px;
 }
 
 input:focus,
 select:focus{
-    outline:2px solid #3b82f6;
+    outline:2px solid #38bdf8;
 }
 
 .stats{
@@ -78,8 +81,8 @@ select:focus{
 .stat{
     background:#2563eb;
     border-radius:12px;
-    text-align:center;
     padding:20px;
+    text-align:center;
 }
 
 .stat span{
@@ -92,6 +95,7 @@ select:focus{
     display:block;
     margin-top:10px;
     font-size:2rem;
+    font-weight:bold;
 }
 
 button{
@@ -101,7 +105,7 @@ button{
     padding:12px 24px;
     border-radius:8px;
     cursor:pointer;
-    font-size:1rem;
+    font-size:15px;
     transition:.2s;
 }
 
@@ -119,40 +123,70 @@ table{
 }
 
 thead{
-    background:#374151;
+    background:#334155;
 }
 
 th,
 td{
     padding:12px;
-    border-bottom:1px solid #374151;
-    text-align:left;
-}
-
-tbody tr:hover{
-    background:#2d3748;
+    border-bottom:1px solid #475569;
+    vertical-align:middle;
 }
 
 th{
-    color:#93c5fd;
+    color:#7dd3fc;
+    white-space:nowrap;
 }
 
-td:nth-child(3),
-td:nth-child(4){
+tbody tr:hover{
+    background:#273449;
+}
+
+tbody td:nth-child(5),
+tbody td:nth-child(6){
     text-align:right;
+    font-weight:bold;
+}
+
+tbody img{
+    width:48px;
+    height:48px;
+    object-fit:contain;
+    border-radius:6px;
+    background:#ffffff;
+    padding:3px;
+}
+
+.empty{
+    text-align:center;
+    color:#94a3b8;
+    padding:30px;
 }
 
 footer{
     margin-top:30px;
     text-align:center;
-    color:#6b7280;
+    color:#64748b;
     font-size:.9rem;
 }
 
-@media(max-width:768px){
+@media(max-width:900px){
 
 .stats{
     grid-template-columns:1fr;
+}
+
+.filters{
+    grid-template-columns:1fr;
+}
+
+table{
+    font-size:13px;
+}
+
+tbody img{
+    width:36px;
+    height:36px;
 }
 
 header h1{

@@ -1,6 +1,9 @@
 // parser.js
+// ==========================================
+// Jewel Viewer Parser
 // YouTube Live Chat Replay (NDJSON)
-// Jewel Gift (giftMessageViewModel) Parser
+// giftMessageViewModel Only
+// ==========================================
 
 function parseChatFile(text) {
 
@@ -16,7 +19,7 @@ function parseChatFile(text) {
 
             const obj = JSON.parse(line);
 
-            const replay = obj.replayChatItemAction;
+            const replay = obj?.replayChatItemAction;
 
             if (!replay) continue;
 
@@ -32,34 +35,75 @@ function parseChatFile(text) {
 
                 if (!item) continue;
 
-                // Jewel Giftのみ対象
+                //--------------------------------------------------
+                // Jewel Gift Only
+                //--------------------------------------------------
+
                 const gift =
                     item.giftMessageViewModel;
 
                 if (!gift) continue;
 
+                //--------------------------------------------------
+                // Author
+                //--------------------------------------------------
+
                 const author =
-                    gift.authorName?.content?.trim() || "";
+                    gift.authorName?.content
+                        ?.trim() || "";
+
+                //--------------------------------------------------
+                // Gift Text
+                //--------------------------------------------------
 
                 const textContent =
                     gift.text?.content || "";
 
-                // "sent " を除去
                 const giftName =
-                    textContent.replace(/^sent\s+/i, "").trim();
+                    textContent
+                        .replace(/^sent\s+/i, "")
+                        .trim();
 
-                const image =
-                    gift.giftImage?.sources?.[0]?.url || "";
+                //--------------------------------------------------
+                // Image URL
+                //--------------------------------------------------
 
-                const imageName =
-                    image
+                let image =
+                    gift.giftImage
+                        ?.sources?.[0]?.url || "";
+
+                if (
+                    image.startsWith("//")
+                ) {
+                    image = "https:" + image;
+                }
+
+                //--------------------------------------------------
+                // imageName
+                //--------------------------------------------------
+
+                let imageName = "";
+
+                if (image !== "") {
+
+                    imageName = image
                         .split("/")
                         .pop()
                         .split("=")[0]
                         .replace(".png", "");
 
-                const jewel =
-                    getJewelCount(imageName);
+                }
+
+                //--------------------------------------------------
+                // Gift Map
+                //--------------------------------------------------
+
+                const info =
+                    getGiftInfo(imageName);
+
+                //--------------------------------------------------
+                // Result
+                //--------------------------------------------------
 
                 result.push({
 
@@ -67,13 +111,18 @@ function parseChatFile(text) {
 
                     author,
 
-                    giftName,
+                    giftName:
+                        info.name || giftName,
 
                     image,
 
                     imageName,
 
-                    jewel,
+                    jewel:
+                        info.jewel,
+
+                    amount:
+                        info.amount,
 
                     raw: gift
 
@@ -81,42 +130,44 @@ function parseChatFile(text) {
 
             }
 
-        } catch (e) {
+        }
 
-            console.warn(e);
+        catch (e) {
+
+            console.warn(
+                "Parse Error",
+                e
+            );
 
         }
 
     }
 
+    //------------------------------------------------------
+    // Time Sort
+    //------------------------------------------------------
+
+    result.sort((a, b) =>
+        a.timestamp - b.timestamp
+    );
+
+    //------------------------------------------------------
+    // Unknown Gift
+    //------------------------------------------------------
+
+    const unknown =
+        getUnknownGifts(result);
+
+    if (unknown.length) {
+
+        console.log(
+            "Unknown Gifts"
+        );
+
+        console.table(unknown);
+
+    }
+
     return result;
-
-}
-
-/*
------------------------------------------------------
-画像名 → Jewel変換
-※ gift-map.js に移動予定
------------------------------------------------------
-*/
-
-function getJewelCount(imageName) {
-
-    const map = {
-
-        // サンプル
-        tea_money: 100,
-
-        laughing_bear_www: 0
-
-        // 今後追加
-        // rose:50
-        // coffee:200
-        // cake:1000
-        // ...
-
-    };
-
-    return map[imageName] || 0;
 
 }

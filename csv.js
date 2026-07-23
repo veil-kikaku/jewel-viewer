@@ -1,89 +1,123 @@
 // csv.js
+// ==========================================
+// Jewel Viewer CSV Export
+// ==========================================
 
-document
-    .getElementById("downloadCsv")
-    .addEventListener("click", downloadCSV);
-
-function downloadCSV() {
-
-    if (!allData.length) {
-        alert("データがありません");
-        return;
-    }
+function downloadCsv(data){
 
     const rows = [];
 
+    //--------------------------------------
+    // Header
+    //--------------------------------------
+
     rows.push([
-        "時間",
-        "ユーザー",
-        "ジュエル",
-        "金額"
+        "Time",
+        "Author",
+        "Gift",
+        "Jewel",
+        "Amount",
+        "Image"
     ]);
 
-    const min = Number(
-        document.getElementById("minJewel").value
-    );
+    //--------------------------------------
+    // Body
+    //--------------------------------------
 
-    const keyword =
-        document
-        .getElementById("searchName")
-        .value
-        .toLowerCase();
-
-    let list = allData.filter(item => {
-
-        if (item.jewel < min) return false;
-
-        if (
-            keyword &&
-            !item.author.toLowerCase().includes(keyword)
-        ) {
-            return false;
-        }
-
-        return true;
-
-    });
-
-    list.forEach(item => {
+    data.forEach(item=>{
 
         rows.push([
-            item.timestamp,
+
+            formatTime(item.timestamp),
+
             item.author,
+
+            item.giftName,
+
             item.jewel,
-            item.amount
+
+            item.amount,
+
+            item.imageName
+
         ]);
 
     });
 
-    const csv = rows
-        .map(r => r.join(","))
-        .join("\n");
+    //--------------------------------------
+    // CSV
+    //--------------------------------------
 
-    // Excel文字化け対策
-    const bom = "\uFEFF";
+    const csv = rows
+        .map(row =>
+            row
+            .map(csvEscape)
+            .join(",")
+        )
+        .join("\r\n");
+
+    //--------------------------------------
+    // UTF-8 BOM
+    //--------------------------------------
 
     const blob = new Blob(
-        [bom + csv],
+        [
+            "\uFEFF",
+            csv
+        ],
         {
             type:"text/csv;charset=utf-8;"
         }
     );
 
-    const url = URL.createObjectURL(blob);
+    const url =
+        URL.createObjectURL(blob);
 
-    const a = document.createElement("a");
+    const a =
+        document.createElement("a");
+
+    const now =
+        new Date();
+
+    const fileName =
+        "jewel-viewer-" +
+        now.getFullYear() +
+        String(now.getMonth()+1).padStart(2,"0") +
+        String(now.getDate()).padStart(2,"0") +
+        "-" +
+        String(now.getHours()).padStart(2,"0") +
+        String(now.getMinutes()).padStart(2,"0") +
+        String(now.getSeconds()).padStart(2,"0") +
+        ".csv";
 
     a.href = url;
-
-    a.download = "jewel-viewer.csv";
+    a.download = fileName;
 
     document.body.appendChild(a);
 
     a.click();
 
-    a.remove();
+    document.body.removeChild(a);
 
     URL.revokeObjectURL(url);
+
+}
+
+//--------------------------------------
+// CSV Escape
+//--------------------------------------
+
+function csvEscape(value){
+
+    if(value===null || value===undefined){
+
+        return "";
+
+    }
+
+    const text =
+        String(value);
+
+    return `"${text.replace(/"/g,'""')}"`;
 
 }
