@@ -199,7 +199,9 @@ filteredData = data;
 
 function formatTime(ms){
 
-    const totalSeconds = Math.floor(ms / 1000);
+    const TIME_OFFSET_SECONDS = 1;
+
+    const totalSeconds = Math.floor(ms / 1000) + TIME_OFFSET_SECONDS;
 
     const hours = Math.floor(totalSeconds / 3600);
 
