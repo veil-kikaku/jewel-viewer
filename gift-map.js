@@ -245,14 +245,24 @@ const GIFT_MAP = {
         jewel: 500
     },
 
-    xxxxx: {
-        name: "xxxx",
-        jewel: 0
+    gg: {
+        name: "炎に包まれたGG",
+        jewel: 120
     },
 
-    xxxxx: {
-        name: "xxxx",
-        jewel: 0
+    orange: {
+        name: "オレンジ",
+        jewel: 10
+    },
+
+    takoyaki: {
+        name: "たこ焼きをどうぞ",
+        jewel: 500
+    },
+
+    sushi: {
+        name: "寿司",
+        jewel: 5500
     },
 
     xxxxx: {
