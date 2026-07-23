@@ -4,6 +4,7 @@
 // ==========================================
 
 let allData = [];
+let filteredData = [];
 
 const fileInput = document.getElementById("fileInput");
 const minJewel = document.getElementById("minJewel");
@@ -188,6 +189,8 @@ function render(){
 
     });
 
+filteredData = data;
+
 }
 
 //--------------------------------------
@@ -233,19 +236,15 @@ function escapeHtml(text){
 
 document
 .getElementById("downloadCsv")
-.addEventListener(
-    "click",
-    ()=>{
+.addEventListener("click", () => {
 
-        if(allData.length===0){
+    if(filteredData.length === 0){
 
-            alert("データがありません");
-
-            return;
-
-        }
-
-        downloadCsv(allData);
+        alert("データがありません");
+        return;
 
     }
-);
+
+    downloadCsv(filteredData);
+
+});
